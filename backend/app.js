@@ -1,5 +1,8 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
+const db = require('./database/connection')
+
+
 
 app.get("/books", (req, res) => {
   // logic for readint the books from database
@@ -32,6 +35,8 @@ app.delete("/books/:id", (req, res) => {
     message: "Deleted Book successfully"
   })
 })
+
+
 
 app.listen(4000, () => {
   console.log("Port is listening to 4000");
