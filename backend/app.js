@@ -1,19 +1,34 @@
 const express = require('express')
+const { books } = require('./database/connection')
 const app = express()
-const db = require('./database/connection')
 
+app.use(express.json())
 
-
-app.get("/books", (req, res) => {
+app.get("/books", async (req, res) => {
   // logic for readint the books from database
-
+  const datas = await books.findAll(); // Select * from books;, always returns array
   res.json({
-    message: "Book fetched successfully"
+    message: "Book fetched successfully",
+    datas
   })
 })
 
-app.post("/books", (req, res) => {
+app.post("/books", async (req, res) => {
   //logic to post books
+  console.log(req.body)
+  // const bookName = req.body.bookName
+  // const bookPrice = req.body.bookPrice
+
+  const { booksName, bookPrice, bookAuthor, bookGenre } = req.body
+  // console.log(bookName, bookPrice);
+
+  //assignment check if all data aako xa vane only procced, else no t procced throw error
+  await books.create({
+    booksName, //colname : value
+    bookPrice,
+    bookAuthor,
+    bookGenre
+  })
 
   res.json({
     message: "Inserted book sucessfully to the database"
