@@ -13,6 +13,8 @@ app.get("/books", async (req, res) => {
   })
 })
 
+//test
+
 app.post("/books", async (req, res) => {
   //logic to post books
   console.log(req.body)
@@ -23,12 +25,17 @@ app.post("/books", async (req, res) => {
   // console.log(bookName, bookPrice);
 
   //assignment check if all data aako xa vane only procced, else no t procced throw error
-  await books.create({
-    booksName, //colname : value
-    bookPrice,
-    bookAuthor,
-    bookGenre
-  })
+  if (booksName && bookPrice && bookAuthor && bookGenre) {
+    await books.create({
+      booksName, //colname : value
+      bookPrice,
+      bookAuthor,
+      bookGenre
+    })
+  } else {
+    console.log("provide missing fields");
+  }
+
 
   res.json({
     message: "Inserted book sucessfully to the database"
