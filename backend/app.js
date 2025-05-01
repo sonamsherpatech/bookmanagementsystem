@@ -33,7 +33,9 @@ app.post("/books", async (req, res) => {
       bookGenre
     })
   } else {
-    console.log("provide missing fields");
+    res.json({
+      message: "provide missing fields"
+    })
   }
 
 
