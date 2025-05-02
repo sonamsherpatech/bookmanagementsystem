@@ -4,7 +4,7 @@ const { Sequelize, DataTypes } = require('sequelize')
 // const bookModel = require("./models/book.model")
 
 
-const sequelize = new Sequelize("postgresql://postgres.ymqwgprrtzqapzlsyoft:I amthe savior of this world@aws-0-us-east-2.pooler.supabase.com:6543/postgres")
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 sequelize.authenticate()
   .then(() => {
