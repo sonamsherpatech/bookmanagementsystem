@@ -1,6 +1,6 @@
 const express = require('express')
-const bookRoute = require("./routes/bookRoute")
 const app = express()
+const bookRoute = require("./routes/bookRoute")
 
 require("./database/connection")
 app.use(express.json())

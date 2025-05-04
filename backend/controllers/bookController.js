@@ -1,4 +1,5 @@
 const { books } = require("../database/connection")
+
 exports.fetchBooks = async (req, res) => {
   // logic for readint the books from database
   const datas = await books.findAll(); // Select * from books;, always returns array
@@ -40,17 +41,51 @@ exports.addBook = async (req, res) => {
 
 exports.deleteBook = async (req, res) => {
   //logic to update books
+
+  //first ma hami kun book delete garna lageko tesko id lim
+  const id = req.params.id
+
+  //id payepaxi tyo id ko book xai db bata udaidim
+  await books.destroy({
+    where: {
+      id
+    }
+  })
   res.json({
     message: "Updated book successfully"
   })
 }
 
-exports.editBook = (req, res) => {
-  //logic to delete books
+exports.editBook = async (req, res) => {
+  try {
+    //logic to delete books
+    //kun id ko xai edit garnu parny, tyo id linu parne
+    const id = req.params.id;
 
-  res.json({
-    message: "Deleted Book successfully"
-  })
+    //k k update garne tw 
+    const { booksName, bookPrice, bookAuthor, bookGenre } = req.body
+
+    await books.update({
+      booksName,
+      bookPrice,
+      bookAuthor,
+      bookGenre,
+    }, {
+      where: {
+        id
+      }
+    })
+
+
+    res.json({
+      message: "Deleted Book successfully"
+    })
+  } catch (error) {
+    res.json({
+      message: "something went wrong"
+    })
+  }
+
 }
 
 exports.singleFetchBook = async function (req, res) {
