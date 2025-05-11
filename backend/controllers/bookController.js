@@ -52,7 +52,7 @@ exports.deleteBook = async (req, res) => {
     }
   })
   res.json({
-    message: "Updated book successfully"
+    message: "Delete book successfully"
   })
 }
 
@@ -78,7 +78,7 @@ exports.editBook = async (req, res) => {
 
 
     res.json({
-      message: "Deleted Book successfully"
+      message: "Updated Book successfully"
     })
   } catch (error) {
     res.json({
